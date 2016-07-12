@@ -1,0 +1,20 @@
+<div class="jumbotron text-left">
+	<form>
+		<h3>Search for your favorite TV Show </h3>
+			<div class="row">
+			<div class="col-md-9">
+		<div class="form-group">
+			<input type="text" value="Girls" class="form-control" ng-model="keyword">
+		</div>
+	</div>
+		<div class="col-md-3">
+		<div class="form-group">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="getSearchResult()">Search</button>
+			</div>
+		</div>
+		</div>
+	</div>
+	</form>
+	<show-result showlist="shows" searchvalue='keyword'></show-result>
+</div>

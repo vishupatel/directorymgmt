@@ -1,0 +1,25 @@
+<div ng-if='searchvalue'>
+<div ng-if="showlist.length > 0">
+	<div class='content-area' ng-repeat='show in showlist'>
+		<div class="row">
+			<div class="col-md-2">
+				<img src="{{ show.show.image.medium }}">
+			</div>
+			<div class="col-md-10">
+				<h3> {{ show.show.name }} </h3>
+				
+					<span ng-repeat='gen in show.show.genres'>
+						{{ $index != 0 ? ' | ' : '' }} {{gen}}
+					</span>
+					<div  ng-bind-html="show.show.summary | safe"></div>	
+					<div class="row">
+						<a href="/detail/{{show.show.id}}" class="btn btn-primary pull-right">Detail</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-if="showlist.length == 0">
+	<h4>No result found</h4>
+	</div>
+</div>

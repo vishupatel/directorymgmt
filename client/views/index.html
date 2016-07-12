@@ -1,0 +1,172 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>FS - Extra</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/custom.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/angular1.js"></script>
+	<script src="js/app.js"></script>
+
+</head>
+<body ng-app="project">
+<div class="container" ng-controller="TreeController">
+
+ <div id="wrapper">
+
+		<div class="top-bar">
+			<div>
+					<button ng-click="openPopup('Copy')" class="btn btn-primary"> Copy </button>
+					<button ng-click="openPopup('Move')" class="btn btn-primary"> Move </button>
+					<button ng-click="deleteFiles()" class="btn btn-primary"> Delete </button>
+					<button ng-click="creteFile()" class="btn btn-primary"> Create File </button>
+					<button ng-click="creteDir()" class="btn btn-primary"> Create Dir </button>
+			</div>
+		</div>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+
+	<script type="text/ng-template"  id="tree_item_renderer.html">
+	    <a href="" ng-click="getDirList(data)">{{data.name}}</a>
+	    <ul >
+	        <li ng-repeat="data in data.nodes.dir" ng-include="'tree_item_renderer.html'"></li>
+	    </ul>
+	</script>
+	<ul class='tree'>
+	    <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+	</ul>
+</div>
+
+	<div id="page-content-wrapper">
+			<table class="table">
+				<tr>
+					<th></th>
+					<th>Name</th>
+          <th>Last Modify</th>
+				</tr>
+
+				<tr ng-repeat="details in detailList.dir">
+					<td><input type="checkbox" ng-model="details.checked" value="{{details.fullpath}}" /></td>
+					<td><a htef="" ng-click="getDirList(details)" >{{details.name}}</a></td>
+          <td></td>
+          <td><a htef="" ng-click="rename(details)" >Rename</a></td>
+				</tr>
+
+				<tr ng-repeat="details in detailList.files">
+					<td><input type="checkbox" ng-model="details.checked" value="{{details.fullpath}}" /></td>
+					<td>{{details.name}}</td>
+          <td>{{details.time}}</td>
+          <td><a htef="" ng-click="rename(details)" >Rename</a></td>
+				</tr>
+			</table>
+	</div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+       	<input type="text" ng-model="destinationPath" class="form-control">
+       		<script type="text/ng-template"  id="popupItems.html">
+			    <a href="" ng-click="getPopupDirList(data)">{{data.name}}</a>
+			    <ul>
+			        <li ng-repeat="data in data.nodes.dir" ng-include="'popupItems.html'"></li>
+			    </ul>
+			</script>
+			<ul class='tree'>
+			    <li ng-repeat="data in popupNodes" ng-include="'popupItems.html'"></li>
+			</ul> 
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" ng-click="doOperation()" >{{ popupFor }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="createFile" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create New File</h4>
+      </div>
+      <div class="modal-body">
+       	<input type="text" ng-model="newFileName" class="form-control">
+       	<textarea ng-model="fileContent" class="form-control"></textarea>       		
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" ng-click="createFilePost()" >Create File</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="createDir" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create New File</h4>
+      </div>
+      <div class="modal-body">
+       	<input type="text" ng-model="dirName" class="form-control">
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" ng-click="createDirPost()" >Create Directory</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="rename" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create New File</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" ng-model="newName" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="renamePost()" >Rename</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

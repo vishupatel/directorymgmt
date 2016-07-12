@@ -1,0 +1,33 @@
+<div class="jumbotron text-left content-area main">
+		<h3>{{ showDetail.name }}</h3>
+		<p>
+			<span ng-repeat='genres in showDetail.genres'> {{ $index != 0 ? ' | ' : '' }} {{ genres }}</span>	
+		</p>
+		<div class='row '>
+		<div class='col-md-2'>
+			<img src='{{showDetail.image.medium}}' />
+		</div>
+		<div class='col-md-8'>
+			<h4>Summary</h4>
+			<hr />
+			</span>
+			<div  ng-bind-html="showDetail.summary | safe"></div>
+
+			<h4>Cast</h4>
+			<hr />
+			<div class='row char-list' style='padding:5px' ng-repeat='cast in showDetail._embedded.cast'>
+				<div class='col-md-2'>
+					<div ng-if="cast.character.image.medium">
+					    <img src='{{cast.character.image.medium}}' />
+					</div>
+					<div ng-if="!cast.character.image.medium">
+					    <img src='/images/user-default.jpg' />
+					</div>
+				</div>
+				<div class='col-md-10'>
+					{{cast.person.name}} ... {{cast.character.name}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "name": "week5",
+  "version": "1.0.0",
+  "description": "Homework 5",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vishakha",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.4.2",
+    "express": "^4.13.3",
+    "fs": "0.0.2",
+    "fs-extra": "^0.26.2",
+    "path": "^0.12.7",
+    "superagent": "^1.4.0"
+  }
+}
